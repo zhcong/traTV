@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404</title>
+    <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+</head>
+<body>
+<h1 id="show" style="text-align: center;">404</h1>
+</body>
+<script type="text/javascript">
+    if ($(window).height() > $(window).width()) {
+        //竖屏
+        $('#show').css('fontSize', $(window).width() / 3);
+    } else {
+        $('#show').css('fontSize', $(window).height() / 3);
+    }
+</script>
+</html>

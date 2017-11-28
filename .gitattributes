@@ -1,0 +1,7 @@
+*.js linguist-language=Python
+*.css linguist-language=Python
+<<<<<<< HEAD
+*.html linguist-language=Python
+=======
+*.html linguist-language=Python
+>>>>>>> ed4f0120c76e356ed95c2b1ed17f4b42fc552edf

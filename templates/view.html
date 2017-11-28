@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    <link rel="Stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="Stylesheet" type="text/css" href="{{ url_for('static', filename='video-js.css') }}"/>
+    <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='interface.js') }}"></script>
+    <script src="{{ url_for('static', filename='video.js') }}"></script>
+    <script src="{{ url_for('static', filename='videojs-contrib-hls.js') }}"></script>
+</head>
+<body>
+<div class="title">
+    <a href="/"><img src="{{ url_for('static', filename='image/TV.svg') }}"></a>
+    <b>大葱的电视</b>
+</div>
+
+<video id="my-video" class="my-video video-js vjs-big-play-centered" controls
+       poster='/image/{{id}}.jpg?quality=source' data-setup='{}' proload="auto">
+    <source src="/stream/{{id}}.m3u8" type='application/x-mpegURL'>
+    <p class="vjs-no-js">
+        请使用新版本的浏览器以支持观看节目。
+    </p>
+</video>
+<p style="text-align: center;">{{title}}</p>
+<p style="text-align: center;margin-top: 20px;">点击<a href="/m3u8/{{id}}.m3u8">这里</a>使用客户端观看</p>
+<div class="foot">
+    <p>感谢清华TV提供视频源，为平板和手机适配</p>
+</div>
+</body>
+</html>

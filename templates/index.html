@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>大葱的电视</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    <link rel="Stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='interface.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.lazyload.min.js') }}"></script>
+
+</head>
+<body>
+<div class="title">
+    <img src="{{ url_for('static', filename='image/TV.svg') }}"><br/>
+    <b>大葱的电视</b>
+</div>
+{% for area in TVlist %}
+<div class="area">
+    <p class="area_title">{{area['title']}}</p>
+    <hr />
+    <div class="area_items">
+    {% for item in area['list'] %}
+        <div class="item" onmousedown="window.open('{{item['url']}}')">
+            <img class="lazy" data-original="{{item['pic']}}" width=100% />
+            <p>{{item['title']}}</p>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endfor %}
+<div class="foot">
+    <p>感谢清华TV提供视频源，为平板和手机适配</p>
+</div>
+</body>
+</html>

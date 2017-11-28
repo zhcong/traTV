@@ -1,0 +1,65 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.title{
+    height: 25pt;
+}
+
+.title img {
+    height: 80%;
+}
+.title b {
+    height: 20%;
+    font-size: 100%;
+}
+
+
+.area {
+    width: 100%;
+}
+
+.area_title{
+    font-weight: bold;
+    width: auto;
+}
+.area_items{
+    width: 100%;
+}
+
+.item {
+    margin-left: 5px;
+    margin-top: 10px;
+    box-shadow: 0px 1px 5px #aaa;
+    height: 85pt;
+    width: 120pt;
+    float: left;
+    position: relative;
+}
+
+.item:active {
+    box-shadow: 0px 5px 20px #aaa;
+}
+
+.item p{
+    font-size: 6px;
+    margin: 0px;
+    margin-left:5px;
+}
+
+.foot{
+    background: #5CACEE;
+    height: 10%;
+    margin-top: 5px;
+}
+.foot p{
+    color: #fff;
+    text-align: center;
+    margin: 0px;
+}
+.my-video{
+    margin-top: 20px;
+    box-shadow: 0px 1px 5px #aaa;
+    background: #000;
+}
