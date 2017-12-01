@@ -1,10 +1,13 @@
-function init() {
+function head_init() {
     $('.item p').css('fontSize', $('.item').height() / 10);
     if ($('.item').length > 0) $('.title').css('height', $('.item').width() / 2);
     else $('.title').css('height', $(window).height() / 5);
     $('.title img').css('marginLeft', ($('.title').width() - $('.title img').width()) / 2);
     $('.title b').css('marginLeft', ($('.title').width() - $('.title b').width()) / 2);
+}
 
+function init() {
+    head_init();
     if ($('.my-video').length <= 0) {
         $('.area_items').each(function () {
             $('.item').css('marginLeft', 5); //init marginLeft
@@ -35,7 +38,7 @@ function init() {
     }
 }
 
-$(document).ready(function () {
+function view_init() {
     if ($('.my-video').length <= 0) {
         $('.area_title').click(function () {
             $(this).nextAll('.area_items').slideToggle(100);
@@ -53,9 +56,11 @@ $(document).ready(function () {
             init();
         });
     }
-})
-;
+}
 
-$(window).resize(function () {
-    init()
-});
+function tip_init() {
+    head_init();
+    $('#tip_text').css('marginLeft', ($(window).width() - $('#tip_text').width()) / 2);
+    $('#admin_code').css('marginLeft', ($(window).width() - $('#admin_code').width()) / 2);
+    $('#sub_btn input').css('marginLeft', ($(window).width() - $('#sub_btn input').width()) / 2);
+}

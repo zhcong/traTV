@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>大葱的电视</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    <link rel="Stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='interface.js') }}"></script>
+</head>
+<body>
+<div class="title">
+    <a href="/"><img src="{{ url_for('static', filename='image/TV.svg') }}"></a>
+    <b>大葱的电视</b>
+</div>
+<div>
+    <div id="tip_title" style="margin-top: 50px"><p>网站公告</p></div>
+    <div id="tip_text"><input type="text" placeholder="公告"></div>
+    <div id="admin_code"><input type="text" placeholder="管理码"></div>
+    <div id="sub_btn"><input type="button" value="提交" onclick="update()"></div>
+</div>
+</body>
+<script type="text/javascript">
+    head_init();
+    $(window).resize(function () {
+        tip_init();
+    });
+    $(document).ready(tip_init());
+    function update() {
+        var update_str=$('#tip_text input').val()+'_'+$('#admin_code input').val();
+        var html=$.ajax({url:"/tip/"+update_str,async:false});
+        $('#sub_btn input').css('color','#fff');
+        if(html.responseText=='ok'){
+            $('#sub_btn input').css('background','#1d953f');
+        }else{
+            $('#sub_btn input').css('background','#aa2116');
+        }
+    }
+</script>
+</html>

@@ -6,13 +6,17 @@
 &#160; &#160; &#160; &#160;部署改项目时可以使用代理服务器（该服务器可以接入IPv6网络），或是直接可以连接到IPv6网络，然后处于同一局域网下的设备就可以访问了。<br />
 &#160; &#160; &#160; &#160;截图如下，专门为手机和平板适配的界面，另外也可以下载m3u8文件来使用本地的播放器观看节目：
 <br />
-![image](https://raw.githubusercontent.com/zhcong/traTV/master/screenshot.png)
+![image](https://raw.githubusercontent.com/zhcong/traTV/master/screenshot.png)<br />
+注意：添加了公告功能，在主页点击最上方电视图标进入(或者输入http://地址:端口/tip)，需要输入管理码(config.py文件设置)
 ## 配置
 `python3 index.py`启动网站，python版本是3.0以上版本。`config.py`文件是配置文件，可以配置是否使用代理、代理配置等
 `proxy_enable`     是否使用代理
 `proxy_ip`         代理服务器地址
 `proxy_port`       代理服务端口
-`source`       视频源(清华)
+`port`             traTV监听的端口
+`timeout`          连接视频源的超时时间
+`admin_code`       发布公告时填写的管理码，相当于密码
+`db_file`          数据库文件的名称
 ## 依赖
 使用`flask`构建的网站，`PIL`处理的截图，因此可能需要安装`flask`、`PIL`和`BeautifulSoup`，可以使用`pip`命令安装。
 ## 感谢

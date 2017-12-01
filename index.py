@@ -4,6 +4,7 @@ import requests, config, io, json
 from contextlib import closing
 from flask import Flask, render_template, redirect, Response, request
 from PIL import Image
+import dbm
 
 # 网络代理
 if config.proxy_enable:
@@ -35,6 +36,24 @@ def get_text(url):
         raise Exception('network 404 error.')
 
 
+# 读取公告
+def get_msg():
+    try:
+        db = dbm.open(config.db_file, 'c')
+        msg = db['msg']
+        db.close()
+        return msg
+    except Exception as e:
+        return ('').encode()
+
+
+# 存入新的公告
+def set_msg(text):
+    db = dbm.open(config.db_file, 'c')
+    db['msg'] = text
+    db.close()
+
+
 app = Flask(__name__)
 
 source_url = 'https://iptv.tsinghua.edu.cn/hls/'
@@ -45,6 +64,7 @@ def index():
     TVlist = []
     # 先抓取节目单
     # https://iptv.tsinghua.edu.cn/channels.json
+    # https://iptv.tsinghua.edu.cn/epg/todayepg.json 节目表
     try:
         channels = get_text('https://iptv.tsinghua.edu.cn/channels.json')
         if channels == '': raise Exception
@@ -65,7 +85,7 @@ def index():
                     })
                 TVlist.append({'title': title, 'list': area_list, 'count': len(area_list)})
         # 模板渲染
-        return render_template('index.html', TVlist=TVlist)
+        return render_template('index.html', TVlist=TVlist, tip=get_msg().decode())
     except Exception as e:
         app.logger.debug(str(e))
         return redirect(404)
@@ -106,7 +126,7 @@ def view(id):
         try:
             title = id
             if request.args.get('title'): title = request.args.get('title')
-            return render_template('view.html', id=id, title=title)
+            return render_template('view.html', id=id, title=title, tip=get_msg().decode())
         except Exception as e:
             return redirect(404)
     else:
@@ -171,10 +191,29 @@ def image(file):
         return redirect(404)
 
 
+@app.route('/tip', methods=['GET'])
+def tip():
+    return render_template('tip.html')
+
+
+# msg = msg_code
+@app.route('/tip/<msg>', methods=['GET'])
+def set_tip(msg):
+    msgs = msg.split('_')
+    if len(msgs) == 2:
+        if msgs[1] == config.admin_code:
+            set_msg(msgs[0])
+            return 'ok'
+        else:
+            return 'bad'
+    else:
+        return 'bad'
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=config.port, threaded=True)
+    app.run(host='0.0.0.0', port=config.port, threaded=True, debug=True)

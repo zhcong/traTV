@@ -12,9 +12,14 @@
 </head>
 <body>
 <div class="title">
-    <img src="{{ url_for('static', filename='image/TV.svg') }}"><br/>
+    <a href="/tip"><img src="{{ url_for('static', filename='image/TV.svg') }}"></a>
     <b>大葱的电视</b>
 </div>
+{% if not tip == '' %}
+    <div id="tip">
+        <marquee scrollamount="5" direction="left" ><img src="{{ url_for('static', filename='image/tip.png') }}" width="20px">{{tip}}</marquee>
+    </div>
+{% endif %}
 {% for area in TVlist %}
 <div class="area">
     <p class="area_title">{{area['title']}}</p>
@@ -33,4 +38,10 @@
     <p>感谢清华TV提供视频源，为平板和手机适配</p>
 </div>
 </body>
+<script type="text/javascript">
+    $(window).resize(function () {
+        init()
+    });
+    $(document).ready(view_init());
+</script>
 </html>

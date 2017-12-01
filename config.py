@@ -5,7 +5,7 @@
 proxy_enable = False
 
 # proxy server ip
-proxy_ip = '172.21.6.82'
+proxy_ip = '172.21.6.182'
 
 # proxy server port
 proxy_port = '8080'
@@ -16,3 +16,9 @@ port = 4443
 # connect the timeout
 
 timeout = 5
+
+# admin code, don't use '_'
+admin_code = 'traTV'
+
+# database path
+db_file = 'traTV'
